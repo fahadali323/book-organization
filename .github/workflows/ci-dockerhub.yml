@@ -12,7 +12,7 @@ on:
 
 jobs:
   test:
-    name: Build Test
+    name: Test and Build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -27,13 +27,35 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Run unit tests
+        run: npm run test
+
       - name: Build
         run: npm run build
+
+  docker-build-check:
+    name: Docker Build Check
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build image (no push)
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile
+          push: false
+          tags: book-organizer:ci-check
 
   dockerhub:
     name: Docker Hub Publish
     runs-on: ubuntu-latest
-    needs: test
+    needs: [test, docker-build-check]
     if: ${{ github.event_name != 'pull_request' && secrets.DOCKERHUB_USERNAME != '' && secrets.DOCKERHUB_TOKEN != '' }}
     steps:
       - name: Checkout
