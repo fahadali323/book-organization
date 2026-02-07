@@ -50,7 +50,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: false
-          tags: book-organizer:ci-check
+          tags: bookorganizer:ci-check
 
   dockerhub:
     name: Docker Hub Publish
@@ -91,7 +91,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ env.DOCKERHUB_USERNAME }}/book-organizer
+          images: ${{ env.DOCKERHUB_USERNAME }}/bookorganizer
           tags: |
             type=ref,event=branch
             type=ref,event=tag
