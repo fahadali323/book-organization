@@ -21,6 +21,11 @@ A local-first React + TypeScript app for tracking books, writing chapter summari
   - OpenAI
   - Anthropic (Claude)
 
+## Docs
+
+- Docker + CI/CD: `docs/docker-cicd.md`
+- Agent/project reference: `docs/agent-reference.md`
+
 ## Tech
 
 - Vite + React 18 + TypeScript
@@ -33,7 +38,7 @@ A local-first React + TypeScript app for tracking books, writing chapter summari
 
 ### Prereqs
 - Node.js 18+ (recommended: 20+)
-- npm (or pnpm/yarn if you prefer; package-lock not included)
+- npm (or pnpm/yarn if you prefer)
 
 ### Install
 ```bash

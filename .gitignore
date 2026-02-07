@@ -11,6 +11,10 @@ coverage/
 .env.local
 .env.server.local
 .env.*.local
+.env.server.example
+.env.local
+.env.example
+.dockerignore
 
 # logs
 *.log
