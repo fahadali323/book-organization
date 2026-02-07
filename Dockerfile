@@ -1,6 +1,9 @@
 # syntax=docker/dockerfile:1.7
 
-FROM node:20-alpine AS deps
+FROM node:24-alpine AS base
+RUN npm install -g npm@11.9.0
+
+FROM base AS deps
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci
@@ -10,7 +13,7 @@ WORKDIR /app
 COPY . .
 RUN npm run build
 
-FROM node:20-alpine AS runtime
+FROM base AS runtime
 WORKDIR /app
 
 ENV NODE_ENV=production
